@@ -33,21 +33,25 @@ public class Obligatorio2020 {
         
         
         p.ver(s.listarEstructura("C", "Universidad").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Universidad ######");
-//        p.ver(s.listarEstructura("C", "Personal").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Personal ######");
-//        p.ver(s.listarEstructura("C", "Trabajo").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Trabajo ######");
-//        p.ver(s.listarEstructura("C", "Otros").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Otros ######");
-//        
-//        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 1 en blanco, Documento Programacion de Carpeta Universidad");
-//        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 2 en blanco, Documento Programacion de Carpeta Universidad");
-//        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 3 en blanco, Documento Programacion de Carpeta Universidad");
-//        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 4 en blanco, Documento Programacion de Carpeta Universidad");
-//        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 5 en blanco, Documento Programacion de Carpeta Universidad");
-//        p.ver(s.insertarLineaEnPosicion(6).resultado, Retorno.Resultado.OK, "Insertar linea 6 blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.listarEstructura("C", "Personal").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Personal ######");
+        /***** INSERTAR LINEAS EN BLANCO AL FINAL *****/
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea AL FINAL 1 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea AL FINAL 2 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea AL FINAL 3 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea AL FINAL 4 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea AL FINAL 5 en blanco, Documento Programacion de Carpeta Universidad");
+        /***** INSERTAR LINEAS EN BLANCO AL FINAL *****/
         
-        
-        
-        
-        //p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
+        /***** INSERTAR LINEAS EN BLANCO POSICION ESPECIFICA *****/
+        p.ver(s.insertarLineaEnPosicion(1).resultado, Retorno.Resultado.OK, "Insertar linea POS 1 en blanco, Documento Programacion de Carpeta Universidad");
+        /***** INSERTAR PALABRAS EN UNA LINEA ESPECIFICA Y EN UNA POSICION ESPECIFICA *****/
+        p.ver(s.insertarPalabraEnLinea(1, 1, "Emanuel").resultado, Retorno.Resultado.OK, "Insertar Palabra En Linea 1 en Posicion de linea 1");
+        p.ver(s.insertarPalabraEnLinea(1, 2, "Coitino").resultado, Retorno.Resultado.OK, "Insertar Palabra En Linea 1 en Posicion de linea 1");
+        /***** INSERTAR LINEAS EN BLANCO POSICION ESPECIFICA *****/
+        p.ver(s.insertarLineaEnPosicion(1).resultado, Retorno.Resultado.OK, "Insertar linea 1 blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLineaEnPosicion(1).resultado, Retorno.Resultado.OK, "Insertar linea 1 blanco, Documento Programacion de Carpeta Universidad");
+
+        p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
         
         //p.ver(s.borrarLinea(2).resultado,Retorno.Resultado.ERROR,"Borrar linea 2");
 //        
@@ -81,6 +85,8 @@ public class Obligatorio2020 {
         p.ver(s.agregarCarpeta("C", "Universidad").resultado, Retorno.Resultado.OK, "Se creo carpeta -> Universidad en Unidad C");
         p.ver(s.agregarMensaje("C", "Universidad", "Programacion").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Programacion a la carpeta Universidad de unidad C");
         
+        /***** CARPETA *****/
+        
         //intento crear carpeta duplicada
         Retorno crearCarpetaDuplicada = s.agregarCarpeta("C", "Universidad");
         p.ver(crearCarpetaDuplicada.resultado, Retorno.Resultado.ERROR, crearCarpetaDuplicada.valorString);
@@ -97,6 +103,10 @@ public class Obligatorio2020 {
         Retorno eliminarCarpetaNoExisteCarpeta = s.eliminarCarpeta("C", "pepe");
         p.ver(eliminarCarpetaNoExisteCarpeta.resultado, Retorno.Resultado.ERROR, eliminarCarpetaNoExisteCarpeta.valorString);
         
+        /***** CARPETA *****/
+        
+        /***** MENSAJE *****/
+        
         //intento agregar mesanje en carpeta no existente
         Retorno agregarMensajeEnCarpetaNoExiste = s.agregarMensaje("C", "pepito", "Programacion");
         p.ver(agregarMensajeEnCarpetaNoExiste.resultado, Retorno.Resultado.ERROR, agregarMensajeEnCarpetaNoExiste.valorString);
@@ -105,12 +115,49 @@ public class Obligatorio2020 {
         Retorno agregarMensajeEnUnidadNoExiste = s.agregarMensaje("H", "Universidad", "Programacion");
         p.ver(agregarMensajeEnUnidadNoExiste.resultado, Retorno.Resultado.ERROR, agregarMensajeEnUnidadNoExiste.valorString);
         
-        //intento agregar mesanje en unidad que no existe
+        //intento agregar mesanje en carpeta que ya existe
         Retorno agregarMensajeQueExiste = s.agregarMensaje("C", "Universidad", "Programacion");
         p.ver(agregarMensajeQueExiste.resultado, Retorno.Resultado.ERROR, agregarMensajeQueExiste.valorString);
         
+        //intento eliminar mesanje en carpeta no existente
+        Retorno eliminarMensajeEnCarpetaNoExiste = s.eliminarMensaje("C", "pepito", "Programacion");
+        p.ver(eliminarMensajeEnCarpetaNoExiste.resultado, Retorno.Resultado.ERROR, eliminarMensajeEnCarpetaNoExiste.valorString);
         
+        //intento eliminar mesanje en unidad que no existe
+        Retorno eliminarMensajeEnUnidadNoExiste = s.eliminarMensaje("H", "Universidad", "Programacion");
+        p.ver(eliminarMensajeEnUnidadNoExiste.resultado, Retorno.Resultado.ERROR, eliminarMensajeEnUnidadNoExiste.valorString);
         
+        //intento eliminar mesanje en archivo que no existe
+        Retorno eliminarMensajeQueExiste = s.eliminarMensaje("C", "Universidad", "Programacion2");
+        p.ver(eliminarMensajeQueExiste.resultado, Retorno.Resultado.ERROR, eliminarMensajeQueExiste.valorString);
+        
+        /***** MENSAJE *****/
+        
+        /***** ESTRUCTURA *****/
+        
+        Retorno noHayCarpetas = s.listarEstructura("H", "Personal");
+        p.ver(noHayCarpetas.resultado, Retorno.Resultado.ERROR, noHayCarpetas.valorString);
+        
+        /***** ESTRUCTURA *****/
+        
+        /***** INSERTAR LINEAS *****/
+        
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 1 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 2 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 3 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 4 en blanco, Documento Programacion de Carpeta Universidad");
+        p.ver(s.insertarLinea().resultado, Retorno.Resultado.OK, "Insertar linea 5 en blanco, Documento Programacion de Carpeta Universidad");
+        
+        //intento insertar una linea en posicion invalida
+        Retorno insertarLineaPosInvalida1 = s.insertarLineaEnPosicion(70); 
+        Retorno insertarLineaPosInvalida2 = s.insertarLineaEnPosicion(25);
+        
+        p.ver(insertarLineaPosInvalida1.resultado, Retorno.Resultado.ERROR, insertarLineaPosInvalida1.valorString);
+        p.ver(insertarLineaPosInvalida2.resultado, Retorno.Resultado.ERROR, insertarLineaPosInvalida2.valorString);        
+        
+        p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
+        
+        /***** INSERTAR LINEAS *****/
     }
     
 }

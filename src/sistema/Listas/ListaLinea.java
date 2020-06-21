@@ -74,7 +74,7 @@ public class ListaLinea {
         }
     }
 
-    public void agregarInicio(Object dato) {
+    public Nodo agregarInicio(Object dato) {
         NodoLinea nuevo = new NodoLinea(dato);
         if (this.esVacia()){
             this.primero = nuevo;
@@ -86,6 +86,7 @@ public class ListaLinea {
             this.primero = nuevo;
             this.cantidadElementos = this.cantidadElementos + 1;
         }
+        return nuevo;
     }
     
     public void agregarNodoPosicion(Object dato, int posicion){
@@ -97,7 +98,13 @@ public class ListaLinea {
         }
         else {
             if(posicion == 1){
-                this.agregarInicio(dato);
+                Nodo nodoLinea = this.agregarInicio(dato);
+
+                this.reOrdenar(nodoLinea.siguiente, posicion);
+//                while(nodoLinea != null){
+//                    nodoLinea.setDato(posicion = posicion + 1);
+//                    nodoLinea = nodoLinea.siguiente;
+//                }
             }
             else if(posicion == (getCantidadElementos() + 1)){
                 this.agregarFinal(dato);
@@ -114,11 +121,19 @@ public class ListaLinea {
                 aux2.siguiente = nuevo;
                 nuevo.siguiente = aux;
                 this.cantidadElementos = this.cantidadElementos + 1;
-                while(aux != null){
-                    aux.setDato(posicion  = posicion + 1);
-                    aux = aux.siguiente;
-                }
+                this.reOrdenar(aux, posicion);
+//                while(aux != null){
+//                    aux.setDato(posicion = posicion + 1);
+//                    aux = aux.siguiente;
+//                }
             }
+        }
+    }
+    
+    public void reOrdenar(Nodo aux, int posicion){
+        while(aux != null){
+            aux.setDato(posicion = posicion + 1);
+            aux = aux.siguiente;
         }
     }
     

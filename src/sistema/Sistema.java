@@ -142,7 +142,7 @@ public class Sistema implements ISistema{
             }
         }
         else {
-            ret.valorString = "La ubicación no existe";
+            ret.valorString = "No hay carpetas en la estructura";
         }
         return ret;
     }
@@ -171,6 +171,7 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno insertarLineaEnPosicion(int posicionLinea) {
+        //(posicionLinea >= 1) y (posicionLinea <= cantidad de líneas + 1
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -179,7 +180,14 @@ public class Sistema implements ISistema{
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
-                nodoDocumento.getListaLinea().agregarNodoPosicion(posicionLinea, posicionLinea);
+                ListaLinea listaLineas =  nodoDocumento.getListaLinea();//obtenemos lista palabras solamente una vez 
+                
+                if(posicionLinea >= 1 && posicionLinea <= (listaLineas.getCantidadElementos() + 1)){
+                    listaLineas.agregarNodoPosicion(posicionLinea, posicionLinea);    
+                }
+                else {
+                    ret.valorString = "La posición no es valida";
+                }
             }
         }
         else {
