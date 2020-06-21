@@ -61,6 +61,13 @@ public class Obligatorio2020 {
         p.ver(s.insertarPalabraEnLinea(4, 1, "jeje").resultado, Retorno.Resultado.OK, "Insertar Palabra En Linea");
         
         p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
+        
+        p.ver(s.borrarOcurrenciasPalabraEnTexto("hdp").resultado, Retorno.Resultado.OK, "Borrar palabra hdp de documento Programacion");
+        p.ver(s.borrarOcurrenciasPalabraEnTexto("jeje").resultado, Retorno.Resultado.OK, "Borrar palabra jeje de documento Programacion");
+        p.ver(s.borrarOcurrenciasPalabraEnTexto("manu").resultado, Retorno.Resultado.OK, "Borrar palabra manu de documento Programacion");
+        p.ver(s.borrarOcurrenciasPalabraEnTexto("segundo").resultado, Retorno.Resultado.OK, "Borrar palabra manu de documento Programacion");
+
+        p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
     }
     
 }

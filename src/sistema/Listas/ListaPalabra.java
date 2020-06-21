@@ -1,6 +1,7 @@
 package sistema.Listas;
 
 import sistema.Nodos.Nodo;
+import sistema.Nodos.NodoCarpeta;
 import sistema.Nodos.NodoLinea;
 import sistema.Nodos.NodoPalabra;
 
@@ -66,7 +67,7 @@ public class ListaPalabra {
         }
     }
     public void agregarNodoPosicion(Object dato, int posicion){
-        NodoPalabra nuevo = new NodoPalabra(posicion + "-" + dato + " ");
+        NodoPalabra nuevo = new NodoPalabra(dato);
         if (this.esVacia()){
             this.primero = nuevo;
             this.ultimo = nuevo;
@@ -74,10 +75,10 @@ public class ListaPalabra {
         }
         else {
             if(posicion == 1){
-                this.agregarInicio(posicion+ "-" + dato + " ");
+                this.agregarInicio(dato);
             }
             else if(posicion == (getCantidadElementos() + 1)){
-                this.agregarFinal(posicion+ "-" + dato + " ");
+                this.agregarFinal(dato);
             }
             else if(posicion > 1 && posicion < (getCantidadElementos() + 1)){
                 Nodo aux, aux2;
@@ -92,10 +93,75 @@ public class ListaPalabra {
                 nuevo.siguiente = aux;
                 this.cantidadElementos = this.cantidadElementos + 1;
                 while(aux != null){
-                    aux.setDato((posicion = posicion + 1) +"-"+ aux.dato );
+                    aux.setDato(aux.dato);
                     aux = aux.siguiente;
                 }
             }
         }
+    }
+    
+    public void borrarInicio() {     
+        if (!this.esVacia()){
+            if (this.primero == this.ultimo){
+                this.vaciar();
+            }
+            else{                     
+                this.primero = (NodoPalabra)this.primero.siguiente;
+            } 
+        }
+    }    
+    
+    public void borrarFinal(){
+        if (!this.esVacia()){
+            if (this.primero == this.ultimo)
+                this.borrarInicio();
+            else{
+                Nodo aux = this.primero;
+                while (aux.getSiguiente().getSiguiente() != null){
+                    aux = aux.getSiguiente();
+                }    
+                this.ultimo = (NodoPalabra)aux;
+                this.ultimo.setSiguiente(null);
+            }
+        }
+    }
+    
+    public NodoPalabra borrarElemento(Object dato){
+        Nodo aux = this.obtenerNodoPalabraPorNombre(dato);
+        if(!this.esVacia()){
+            if(this.primero == this.ultimo && aux == this.primero){
+                this.vaciar();
+            }
+            else if(aux == this.primero){
+                this.borrarInicio();
+            }
+            else if (aux == this.ultimo){
+                this.borrarFinal();
+            }
+            else {
+                Nodo anterior,temporal;
+                anterior = this.primero;
+                temporal = this.primero.siguiente;
+                while(temporal != null && temporal != aux){
+                    anterior = anterior.siguiente;
+                    temporal = temporal.siguiente;
+                }
+                //lo encontro
+                if(temporal != null){
+                    anterior.siguiente = temporal.siguiente;
+                }
+            }
+        }
+        return (NodoPalabra)aux;
+    }
+    public NodoPalabra obtenerNodoPalabraPorNombre(Object dato) {
+        Nodo aux = this.primero;
+        while (aux != null){
+            if (aux.getDato() == dato){
+                return (NodoPalabra)aux;
+            }
+            aux = aux.getSiguiente();
+        }
+        return null;
     }    
 }

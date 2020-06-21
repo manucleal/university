@@ -47,13 +47,21 @@ public class ListaLinea {
                 System.out.println();
             }
             while(aux2 != null){
-                System.out.print(aux2.getDato());
+                System.out.print(aux2.getDato()+" ");
                 aux2 = (NodoPalabra)aux2.siguiente;
             }
             System.out.println();
             aux = (NodoLinea)aux.siguiente;
         }
-    }    
+    }
+
+    public void borrarOcurrenciaPalabra(Object dato){
+        NodoLinea aux = this.primero;
+        while (aux != null){
+            aux.getListaPalabra().borrarElemento(dato);
+            aux = (NodoLinea)aux.siguiente;
+        }
+    }
       
     public void agregarFinal(Object dato) {
         NodoLinea nuevo = new NodoLinea(dato);   

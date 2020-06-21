@@ -236,6 +236,20 @@ public class Sistema implements ISistema{
     @Override
     public Retorno borrarOcurrenciasPalabraEnTexto(String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos 
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                nodoDocumento.getListaLinea().borrarOcurrenciaPalabra(palabraABorrar);
+                //NodoDocumento resultado = listaDocumentos.borrarElemento(mensaje);
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        } 
         return ret;
     }
 
