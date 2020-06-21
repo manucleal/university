@@ -63,8 +63,7 @@ public class ListaCarpeta {
     }
     
     public void agregarFinal(Object dato) {
-        NodoCarpeta nuevo = new NodoCarpeta(dato);
-           
+        NodoCarpeta nuevo = new NodoCarpeta(dato);       
         if (this.esVacia())
             this.agregarInicio(dato);
         else {
@@ -72,7 +71,7 @@ public class ListaCarpeta {
             ultimo = nuevo;
         }
     }
-    
+    //en uso
     public void borrarFinal(){
         if (!this.esVacia()){
             if (this.primero == this.ultimo)
@@ -87,10 +86,10 @@ public class ListaCarpeta {
             }
         }
     }
-    
+    //en uso
     public NodoCarpeta borrarElemento(Object dato){
-        Nodo aux = this.obtenerNodoCarpetaPorNombre(dato);
-        if(!this.esVacia()){
+        Nodo aux = this.obtenerNodoPorNombre(dato);
+        if(aux != null && !this.esVacia()){
             if(this.primero == this.ultimo && aux == this.primero.dato){
                 this.vaciar();
             }
@@ -104,7 +103,7 @@ public class ListaCarpeta {
                 Nodo anterior,temporal;
                 anterior = this.primero;
                 temporal = this.primero.siguiente;
-                while(temporal != null && temporal.dato != aux){
+                while(temporal != null && temporal != aux){
                     anterior = anterior.siguiente;
                     temporal = temporal.siguiente;
                 }
@@ -116,7 +115,7 @@ public class ListaCarpeta {
         }
         return (NodoCarpeta)aux;
     }
-    
+    //en uso
     public boolean buscarElemento(Object dato) {
         Nodo aux = this.primero;
         while (aux!=null){
@@ -127,7 +126,7 @@ public class ListaCarpeta {
         }     
         return false;
     }
-    
+    //en uso
     public void borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){
@@ -140,8 +139,7 @@ public class ListaCarpeta {
         }
     }
     
-    //recibe nombre carpeta y devuelve un nodo carpeta
-    public NodoCarpeta obtenerNodoCarpetaPorNombre(Object dato) {
+    public NodoCarpeta obtenerNodoPorNombre(Object dato) {
         Nodo aux = this.primero;
         while (aux != null){
             if (aux.getDato() == dato){

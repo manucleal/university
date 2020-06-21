@@ -28,29 +28,29 @@ public class Sistema implements ISistema{
     @Override
     public Retorno destruirSistemaMensajes() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);    
-        this.unidades = null;
+        this.unidades.vaciar();
         return ret;
     }
 
     @Override
     public Retorno agregarCarpeta(String unidad, String carpeta) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre(unidad);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
                 
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();
             
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre(carpeta);
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre(carpeta);
             
             if(nodoCarpeta == null){
                 listaCarpetas.agregarFinal(carpeta);
             }
             else {
-                ret.valorString = "Ya existe la carpeta: "+ carpeta + " en la ubicación";
+                ret.valorString = "La carpeta a crear ya existe";
             }
         }
         else {
-             ret.valorString = "La ubicación no existe";
+             ret.valorString = "La ubicación donde se creará la carpeta no existe";
         }
        
         return ret;
@@ -59,15 +59,12 @@ public class Sistema implements ISistema{
     @Override
     public Retorno eliminarCarpeta(String unidad, String carpeta) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre(unidad);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos solamente una vez
             NodoCarpeta resultado = listaCarpetas.borrarElemento(carpeta);
-            if(resultado != null){
-                ret.valorString = "La carpeta eliminada fue "+ resultado.dato;
-            }
-            else {
+            if(resultado == null){
                 ret.valorString = "La carpeta a eliminar no existe"; 
             }
         }
@@ -81,10 +78,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno agregarMensaje(String unidad, String carpeta, String mensaje) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre(unidad);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre(carpeta);
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre(carpeta);
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre(mensaje);
@@ -92,7 +89,7 @@ public class Sistema implements ISistema{
                     listaDocumentos.agregarFinal(mensaje);
                 }
                 else {
-                    ret.valorString = "Ya existe el Documento: "+ mensaje + " en la ubicación";
+                    ret.valorString = "El archivo ya existe";
                 }
             }
             else{
@@ -108,10 +105,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno eliminarMensaje(String unidad, String carpeta, String mensaje) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre(unidad);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre(carpeta);
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre(carpeta);
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();//obtenemos lista documentos solamente una vez
                 NodoDocumento resultado = listaDocumentos.borrarElemento(mensaje);
@@ -135,10 +132,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno listarEstructura(String unidad, String carpeta) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre(unidad);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         if(nodoUnidad != null){//si unidad existe procedemos
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre(carpeta);
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre(carpeta);
             if(nodoCarpeta != null){ //encontro carpeta
                 System.out.println(" Carpeta: " + carpeta+ "\n");
                 nodoCarpeta.getListaDocumento().mostrar();
@@ -157,10 +154,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno insertarLinea() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//nos posicionamos en lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //nos posicionamos en lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
@@ -179,10 +176,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno insertarLineaEnPosicion(int posicionLinea) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
@@ -198,10 +195,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno borrarLinea(int posicionLinea) {
         Retorno ret = new Retorno (Retorno.Resultado.ERROR);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
@@ -217,10 +214,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno borrarTodo() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
@@ -236,10 +233,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno borrarOcurrenciasPalabraEnTexto(String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
@@ -256,10 +253,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno imprimirTexto() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
@@ -278,10 +275,10 @@ public class Sistema implements ISistema{
     @Override
     public Retorno insertarPalabraEnLinea(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoUnidadPorNombre("C");
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoCarpetaPorNombre("Universidad");
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");

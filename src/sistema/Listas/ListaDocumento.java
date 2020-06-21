@@ -60,6 +60,7 @@ public class ListaDocumento {
             this.primero = nuevo;                      
         }
     }
+    //en uso
     public void agregarFinal(Object dato) {
         NodoDocumento nuevo = new NodoDocumento(dato);
            

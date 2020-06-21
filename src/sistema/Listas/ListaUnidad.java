@@ -1,8 +1,10 @@
 package sistema.Listas;
 
+import sistema.Interfaces.ILista;
+import sistema.Nodos.Nodo;
 import sistema.Nodos.NodoUnidad;
 
-public class ListaUnidad{
+public class ListaUnidad implements ILista{
     NodoUnidad primero;
     NodoUnidad ultimo;
     
@@ -11,26 +13,28 @@ public class ListaUnidad{
         this.ultimo = null;
     }
 
-    public NodoUnidad getPrimero() {
-        return primero;
-    }
+//    public NodoUnidad getPrimero() {
+//        return primero;
+//    }
 
-    public NodoUnidad getUltimo() {
-        return ultimo;
-    }
+//    public NodoUnidad getUltimo() {
+//        return ultimo;
+//    }
 
-    public void setPrimero(NodoUnidad primero) {
-        this.primero = primero;
-    }
+//    public void setPrimero(NodoUnidad primero) {
+//        this.primero = primero;
+//    }
+//    
+//    public void setUltimo(NodoUnidad ultimo) {
+//        this.ultimo = ultimo;
+//    }
     
-    public void setUltimo(NodoUnidad ultimo) {
-        this.ultimo = ultimo;
-    }
-    
+    @Override
     public boolean esVacia() {
         return (this.primero == null);
     }
     
+    @Override
     public void vaciar() {
         this.primero = null;
         this.ultimo = null;
@@ -47,50 +51,16 @@ public class ListaUnidad{
             this.primero = nuevo;                      
         }
     }
-    public void agregarFinal(Object dato) {
-        NodoUnidad nuevo = new NodoUnidad(dato);
-           
-        if (this.esVacia())
-            this.agregarInicio(dato);
-        else {
-            ultimo.siguiente = nuevo;
-            ultimo = nuevo;
-        }
-    }    
-
-    public boolean buscarElemento(Object dato) {
-        NodoUnidad aux = this.primero;
-        while (aux!=null){
-            if (aux.getDato()==dato){
-                return true;
-            }
-            aux.setSiguiente(aux);
-        }     
-        return false;
-    }
     
-    public NodoUnidad obtenerNodoUnidadPorNombre(String dato) {
-        NodoUnidad aux = this.primero;
+    @Override
+    public NodoUnidad obtenerNodoPorNombre(String dato) {
+        Nodo aux = this.primero;
         while (aux != null){
             if (aux.getDato() == dato){
-                return aux;
+                return (NodoUnidad)aux;
             }
-            aux.setSiguiente(aux);            
-            //aux=aux.siguiente; 
+            aux = aux.siguiente;
         }
         return null;
-    }
-
-    public void borrarInicio() {     
-        if (!this.esVacia()){
-            if (this.primero==this.ultimo){
-                this.primero=null;
-                this.ultimo=null;
-            }
-            else{                     
-                 //this.primero=this.primero.siguiente;
-                 this.primero.setSiguiente(this.primero.getSiguiente());
-            } 
-        }
     }
 }

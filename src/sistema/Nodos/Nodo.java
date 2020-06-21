@@ -10,9 +10,9 @@ public abstract class Nodo {
         this.siguiente = null;
     }
     
-    public Nodo() {
-        this.siguiente = null;
-    }
+//    public Nodo() {
+//        this.siguiente = null;
+//    }
 
     public Object getDato() {
         return dato;
