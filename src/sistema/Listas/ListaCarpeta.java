@@ -16,22 +16,6 @@ public class ListaCarpeta {
         this.primero = primero;
         this.ultimo = ultimo;
     }
-
-    public Object getPrimero() {
-        return primero;
-    }
-
-    public void setPrimero(NodoCarpeta primero) {
-        this.primero = primero;
-    }
-
-    public Object getUltimo() {
-        return ultimo;
-    }
-
-    public void setUltimo(NodoCarpeta ultimo) {
-        this.ultimo = ultimo;
-    }
        
     public boolean esVacia() {
         return (this.primero == null);
@@ -116,17 +100,6 @@ public class ListaCarpeta {
         return (NodoCarpeta)aux;
     }
     //en uso
-    public boolean buscarElemento(Object dato) {
-        Nodo aux = this.primero;
-        while (aux!=null){
-            if (aux.getDato()==dato){
-                return true;
-            }
-            aux = aux.siguiente; 
-        }     
-        return false;
-    }
-    //en uso
     public void borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){
@@ -138,7 +111,7 @@ public class ListaCarpeta {
             } 
         }
     }
-    
+    //en uso
     public NodoCarpeta obtenerNodoPorNombre(Object dato) {
         Nodo aux = this.primero;
         while (aux != null){

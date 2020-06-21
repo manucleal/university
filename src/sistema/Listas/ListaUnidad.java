@@ -1,10 +1,8 @@
 package sistema.Listas;
-
-import sistema.Interfaces.ILista;
 import sistema.Nodos.Nodo;
 import sistema.Nodos.NodoUnidad;
 
-public class ListaUnidad implements ILista{
+public class ListaUnidad {
     NodoUnidad primero;
     NodoUnidad ultimo;
     
@@ -12,29 +10,11 @@ public class ListaUnidad implements ILista{
         this.primero = null;
         this.ultimo = null;
     }
-
-//    public NodoUnidad getPrimero() {
-//        return primero;
-//    }
-
-//    public NodoUnidad getUltimo() {
-//        return ultimo;
-//    }
-
-//    public void setPrimero(NodoUnidad primero) {
-//        this.primero = primero;
-//    }
-//    
-//    public void setUltimo(NodoUnidad ultimo) {
-//        this.ultimo = ultimo;
-//    }
     
-    @Override
     public boolean esVacia() {
         return (this.primero == null);
     }
     
-    @Override
     public void vaciar() {
         this.primero = null;
         this.ultimo = null;
@@ -51,15 +31,14 @@ public class ListaUnidad implements ILista{
             this.primero = nuevo;                      
         }
     }
-    
-    @Override
-    public NodoUnidad obtenerNodoPorNombre(String dato) {
+
+    public NodoUnidad obtenerNodoPorNombre(Object dato) {
         Nodo aux = this.primero;
         while (aux != null){
             if (aux.getDato() == dato){
                 return (NodoUnidad)aux;
             }
-            aux = aux.siguiente;
+            aux = aux.getSiguiente();
         }
         return null;
     }

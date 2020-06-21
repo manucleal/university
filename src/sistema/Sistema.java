@@ -84,7 +84,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre(carpeta);
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre(mensaje);
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre(mensaje);
                 if(nodoDocumento == null){
                     listaDocumentos.agregarFinal(mensaje);
                 }
@@ -112,11 +112,8 @@ public class Sistema implements ISistema{
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();//obtenemos lista documentos solamente una vez
                 NodoDocumento resultado = listaDocumentos.borrarElemento(mensaje);
-                if(resultado != null){
-                    ret.valorString = "El Documento eliminado fue "+ resultado.dato;
-                }
-                else {
-                    ret.valorString = "El Documento no existe";
+                if(resultado == null){
+                    ret.valorString = "El archivo no existe"; 
                 }
             }
             else {
@@ -137,9 +134,8 @@ public class Sistema implements ISistema{
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre(carpeta);
             if(nodoCarpeta != null){ //encontro carpeta
-                System.out.println(" Carpeta: " + carpeta+ "\n");
+                System.out.println("Carpeta: " + carpeta+ "\n");
                 nodoCarpeta.getListaDocumento().mostrar();
-                //listaCarpetas.mostrar();
             }
             else {
                 ret.valorString = "No hay carpetas en la estructura";
@@ -160,7 +156,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //nos posicionamos en lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 
                 ListaLinea listaLineas = nodoDocumento.getListaLinea();//nos posicionamos en lista lieneas solamente una vez
                 int nroLinea = listaLineas.getCantidadElementos() + 1;                
@@ -182,7 +178,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 nodoDocumento.getListaLinea().agregarNodoPosicion(posicionLinea, posicionLinea);
             }
         }
@@ -201,7 +197,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 nodoDocumento.getListaLinea().borrarNodoPosicion(posicionLinea);
             }
         }
@@ -220,7 +216,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 nodoDocumento.getListaLinea().vaciar();
             }
         }
@@ -239,7 +235,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 nodoDocumento.getListaLinea().borrarOcurrenciaPalabra(palabraABorrar);
                 //NodoDocumento resultado = listaDocumentos.borrarElemento(mensaje);
             }
@@ -259,7 +255,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 nodoDocumento.getListaLinea().mostrar();
             }
             else {
@@ -281,7 +277,7 @@ public class Sistema implements ISistema{
             NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoDocumentoPorNombre("Programacion");
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 NodoLinea nodoLinea = nodoDocumento.getListaLinea().obtenerNodoLineaPorNombre(posicionLinea);
                 nodoLinea.getListaPalabra().agregarNodoPosicion(palabraAIngresar, posicionPalabra);
             }

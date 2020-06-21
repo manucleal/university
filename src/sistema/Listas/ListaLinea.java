@@ -149,7 +149,7 @@ public class ListaLinea {
             }
         }
     }
-    
+    //cuidado
     public void borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){

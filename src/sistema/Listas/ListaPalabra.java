@@ -1,8 +1,6 @@
 package sistema.Listas;
 
 import sistema.Nodos.Nodo;
-import sistema.Nodos.NodoCarpeta;
-import sistema.Nodos.NodoLinea;
 import sistema.Nodos.NodoPalabra;
 
 public class ListaPalabra {

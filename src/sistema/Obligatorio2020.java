@@ -6,9 +6,9 @@ public class Obligatorio2020 {
         Sistema sist = new Sistema();
         Prueba p1 = new Prueba();
         
-        //pruebaSinErrores(sist, p1);
+        pruebaSinErrores(sist, p1);
         
-        pruebaErroresCrearCarpeta(sist, p1);
+        //pruebaErroresCrearCarpeta(sist, p1);
 
     }
     
@@ -22,13 +22,17 @@ public class Obligatorio2020 {
         p.ver(s.eliminarCarpeta("C", "Otros").resultado, Retorno.Resultado.OK, "Se eliminó carpeta Otros de unidad C");
         //agregando mensajes
         p.ver(s.agregarMensaje("C", "Universidad", "Programacion").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Programacion a la carpeta Universidad de unidad C");
+        p.ver(s.agregarMensaje("C", "Universidad", "Programacion2").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Programacion2 a la carpeta Universidad de unidad C");
         p.ver(s.agregarMensaje("C", "Universidad", "Algoritmos y Estructuras de Datos").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Algoritmos y Estructuras de Datos a la carpeta Universidad de unidad C");
         p.ver(s.agregarMensaje("C", "Personal", "Gastos").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Gastos a la carpeta Personal de unidad C");
         p.ver(s.agregarMensaje("C", "Trabajo", "ADX").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento ADX a la carpeta Personal de unidad C");
         p.ver(s.agregarMensaje("C", "Trabajo", "AudioTrade").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento AudioTrade a la carpeta Personal de unidad C");
         
+        //eliminando nodo carpeta del medio
+        p.ver(s.eliminarMensaje("C", "Universidad", "Programacion2").resultado, Retorno.Resultado.OK, "Se elimino Mensaje/Documento ADX de carpeta trabajo en unidad C");
         
-//        p.ver(s.listarEstructura("C", "Universidad").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Universidad ######");
+        
+        p.ver(s.listarEstructura("C", "Universidad").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Universidad ######");
 //        p.ver(s.listarEstructura("C", "Personal").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Personal ######");
 //        p.ver(s.listarEstructura("C", "Trabajo").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Trabajo ######");
 //        p.ver(s.listarEstructura("C", "Otros").resultado, Retorno.Resultado.OK, "###### Estructura Carpeta: Otros ######");
@@ -77,7 +81,7 @@ public class Obligatorio2020 {
         p.ver(s.agregarCarpeta("C", "Universidad").resultado, Retorno.Resultado.OK, "Se creo carpeta -> Universidad en Unidad C");
         p.ver(s.agregarMensaje("C", "Universidad", "Programacion").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Programacion a la carpeta Universidad de unidad C");
         
-//intento crear carpeta duplicada
+        //intento crear carpeta duplicada
         Retorno crearCarpetaDuplicada = s.agregarCarpeta("C", "Universidad");
         p.ver(crearCarpetaDuplicada.resultado, Retorno.Resultado.ERROR, crearCarpetaDuplicada.valorString);
         
@@ -105,10 +109,8 @@ public class Obligatorio2020 {
         Retorno agregarMensajeQueExiste = s.agregarMensaje("C", "Universidad", "Programacion");
         p.ver(agregarMensajeQueExiste.resultado, Retorno.Resultado.ERROR, agregarMensajeQueExiste.valorString);
         
-//        p.ver(s.agregarMensaje("C", "Universidad", "Algoritmos y Estructuras de Datos").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Algoritmos y Estructuras de Datos a la carpeta Universidad de unidad C");
-//        p.ver(s.agregarMensaje("C", "Personal", "Gastos").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Gastos a la carpeta Personal de unidad C");
-//        p.ver(s.agregarMensaje("C", "Trabajo", "ADX").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento ADX a la carpeta Personal de unidad C");
-//        p.ver(s.agregarMensaje("C", "Trabajo", "AudioTrade").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento AudioTrade a la carpeta Personal de unidad C");
+        
+        
     }
     
 }

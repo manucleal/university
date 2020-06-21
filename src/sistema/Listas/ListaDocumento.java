@@ -16,22 +16,6 @@ public class ListaDocumento {
         this.primero = primero;
         this.ultimo = ultimo;
     }
-    
-    public Object getPrimero() {
-        return primero;
-    }
-
-    public void setPrimero(NodoDocumento primero) {
-        this.primero = primero;
-    }
-
-    public Object getUltimo() {
-        return ultimo;
-    }
-
-    public void setUltimo(NodoDocumento ultimo) {
-        this.ultimo = ultimo;
-    }
        
     public boolean esVacia() {
         return (this.primero == null);
@@ -45,7 +29,7 @@ public class ListaDocumento {
     public void mostrar() {
         Nodo aux = this.primero;
         while (aux != null){
-            System.out.println(" ##### Documento: " + aux.getDato());
+            System.out.println("Documento: " + aux.getDato());
             aux = aux.siguiente;
         }
     }
@@ -90,14 +74,13 @@ public class ListaDocumento {
                 this.ultimo = null;
             }
             else{                     
-                //this.primero=this.primero.siguiente;
-                this.primero.setSiguiente(this.primero.getSiguiente());
+                this.primero = (NodoDocumento)this.primero.siguiente;
             } 
         }
     } 
     
     //recibe nombre documento y devuelve un nodo documento
-    public NodoDocumento obtenerNodoDocumentoPorNombre(Object dato) {
+    public NodoDocumento obtenerNodoPorNombre(Object dato) {
         Nodo aux = this.primero;
         while (aux != null){
             if (aux.getDato() == dato){
@@ -124,7 +107,7 @@ public class ListaDocumento {
     }
     
     public NodoDocumento borrarElemento(Object dato){
-        Nodo aux = this.obtenerNodoDocumentoPorNombre(dato);
+        Nodo aux = this.obtenerNodoPorNombre(dato);
         if(!this.esVacia()){
             if(this.primero == this.ultimo && aux == this.primero.dato){
                 this.vaciar();
@@ -139,7 +122,7 @@ public class ListaDocumento {
                 Nodo anterior,temporal;
                 anterior = this.primero;
                 temporal = this.primero.siguiente;
-                while(temporal != null && temporal.dato != aux){
+                while(temporal != null && temporal != aux){
                     anterior = anterior.siguiente;
                     temporal = temporal.siguiente;
                 }
