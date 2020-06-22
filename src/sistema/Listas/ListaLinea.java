@@ -58,6 +58,50 @@ public class ListaLinea {
             }
         }
     }
+    
+    public String reOrdenarPalabrasEnLineas(Object posicionLinea, Object palabraAIngresar, int posicionPalabra){
+        String retorno = "";
+        NodoLinea nodoLinea = this.obtenerNodoPorNombre(posicionLinea);
+        if(nodoLinea != null){          
+            ListaPalabra listaPalabras = nodoLinea.getListaPalabra();
+            if(posicionPalabra >= 1 && posicionPalabra <= (listaPalabras.getCantidadElementos() + 1)){
+            
+                listaPalabras.agregarNodoPosicion(palabraAIngresar, posicionPalabra);
+
+                if(listaPalabras.getMAX_CANT_PALABRAS_X_LINEA() < listaPalabras.getCantidadElementos()){
+                    while(nodoLinea != null){
+                        if(nodoLinea.getListaPalabra().getMAX_CANT_PALABRAS_X_LINEA() < nodoLinea.getListaPalabra().getCantidadElementos()){
+                            if(nodoLinea.siguiente == null){ //si esta linea es la ultima agrego linea en blanco nueva 
+                                //esto sucede en la ultima linena, solamente ahi se genera una linea nueva
+                                int nroLinea = this.cantidadElementos + 1;               
+                                this.agregarFinal(nroLinea);
+                            }
+                            //obtendo palabra final y la guardo en variable temporal
+                            Object temporal = nodoLinea.getListaPalabra().getUltimo().dato;
+                            //elimino nodo final de linea llena          
+                            nodoLinea.getListaPalabra().borrarFinal();
+                            //me muevo a la linea sifuiente 
+                            nodoLinea = (NodoLinea)nodoLinea.siguiente;
+                            //ingreso palabra al inicio
+                            nodoLinea.getListaPalabra().agregarNodoPosicion(temporal, 1);
+                            //luego de pasar a la linea de abajo se pregunta si esta llena
+                        }
+                        else {
+                            //me muevo a la linea sifuiente 
+                            nodoLinea = (NodoLinea)nodoLinea.siguiente;
+                        }
+                    }
+                }                
+            }
+            else {
+                retorno = "La posición de la palabra no es válida";
+            }
+        }
+        else {
+            retorno =  "La posición de la línea no es válida";
+        }
+        return retorno;
+    }
 
     public void borrarOcurrenciaPalabra(Object dato){
         NodoLinea aux = this.primero;

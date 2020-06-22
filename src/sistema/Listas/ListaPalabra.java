@@ -76,9 +76,7 @@ public class ListaPalabra {
     public void agregarNodoPosicion(Object dato, int posicion){
         NodoPalabra nuevo = new NodoPalabra(dato);
         if (this.esVacia()){
-            this.primero = nuevo;
-            this.ultimo = nuevo;
-            this.cantidadElementos = this.cantidadElementos + 1;
+            this.agregarInicio(dato);
         }
         else {
             if(posicion == 1){

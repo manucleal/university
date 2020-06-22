@@ -71,9 +71,24 @@ public class Obligatorio2020 {
         
         p.ver(s.insertarPalabraEnLinea(6, 2, "excedente2").resultado, Retorno.Resultado.OK, "Insertar Palabra En Linea"); 
         p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
+        
         p.ver(s.insertarPalabraYDesplazar(1, 1, "pepito").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
         p.ver(s.insertarPalabraYDesplazar(1, 1, "audioad").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-        //p.ver(s.insertarPalabraYDesplazar(1, 1, "otra").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(1, 1, "jp").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(1, 1, "fer").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(1, 1, "manu").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(1, 1, "otra").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(3, 3, "hola").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva3").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva8").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(5, 1, "ultimotest3").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(5, 1, "ultimotest2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(5, 1, "ultimotest1").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.insertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
         //s.insertarPalabraYDesplazar(posiconLinea, PosicionPalabra, palabraAIngresar);
         p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
     }
