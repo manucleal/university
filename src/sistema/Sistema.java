@@ -198,7 +198,7 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno borrarLinea(int posicionLinea) {
-        Retorno ret = new Retorno (Retorno.Resultado.ERROR);
+        Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
             ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
@@ -206,8 +206,15 @@ public class Sistema implements ISistema{
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
-                nodoDocumento.getListaLinea().borrarNodoPosicion(posicionLinea);
-            }
+                ListaLinea listaLineas = nodoDocumento.getListaLinea();//ontenemos lista lineas solo una vez
+
+                if(posicionLinea >= 1 && posicionLinea <= listaLineas.getCantidadElementos()){
+                    listaLineas.borrarNodoPosicion(posicionLinea);
+                }
+                else {
+                    ret.valorString = "La posición no es valida";
+                }                
+            }            
         }
         else {
             ret.valorString = "La ubicación no existe";
@@ -245,7 +252,6 @@ public class Sistema implements ISistema{
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 nodoDocumento.getListaLinea().borrarOcurrenciaPalabra(palabraABorrar);
-                //NodoDocumento resultado = listaDocumentos.borrarElemento(mensaje);
             }
         }
         else {
@@ -264,7 +270,12 @@ public class Sistema implements ISistema{
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
-                nodoDocumento.getListaLinea().mostrar();
+                if(nodoDocumento != null){
+                    nodoDocumento.getListaLinea().mostrar();
+                }
+                else {
+                    ret.valorString = "No existe el documento";
+                }
             }
             else {
                 ret.valorString = "No hay carpetas en la estructura";

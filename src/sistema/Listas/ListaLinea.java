@@ -40,18 +40,23 @@ public class ListaLinea {
 
     public void mostrar() {
         NodoLinea aux = this.primero;
-        while (aux != null){
-            System.out.print("Linea: " + aux.getDato()+" - ");
-            NodoPalabra aux2 = aux.getListaPalabra().primero;
-            if(aux2 == null){
+        if(aux == null){
+            System.out.println("Texto Vacio");
+        }
+        else {        
+            while (aux != null){
+                System.out.print("Linea: " + aux.getDato()+" - ");
+                NodoPalabra aux2 = aux.getListaPalabra().primero;
+                if(aux2 == null){
+                    System.out.println();
+                }
+                while(aux2 != null){
+                    System.out.print(aux2.getDato()+" ");
+                    aux2 = (NodoPalabra)aux2.siguiente;
+                }
                 System.out.println();
+                aux = (NodoLinea)aux.siguiente;
             }
-            while(aux2 != null){
-                System.out.print(aux2.getDato()+" ");
-                aux2 = (NodoPalabra)aux2.siguiente;
-            }
-            System.out.println();
-            aux = (NodoLinea)aux.siguiente;
         }
     }
 
@@ -99,12 +104,7 @@ public class ListaLinea {
         else {
             if(posicion == 1){
                 Nodo nodoLinea = this.agregarInicio(dato);
-
-                this.reOrdenar(nodoLinea.siguiente, posicion);
-//                while(nodoLinea != null){
-//                    nodoLinea.setDato(posicion = posicion + 1);
-//                    nodoLinea = nodoLinea.siguiente;
-//                }
+                this.reOrdenarCreciente(nodoLinea.siguiente, posicion);
             }
             else if(posicion == (getCantidadElementos() + 1)){
                 this.agregarFinal(dato);
@@ -121,25 +121,29 @@ public class ListaLinea {
                 aux2.siguiente = nuevo;
                 nuevo.siguiente = aux;
                 this.cantidadElementos = this.cantidadElementos + 1;
-                this.reOrdenar(aux, posicion);
-//                while(aux != null){
-//                    aux.setDato(posicion = posicion + 1);
-//                    aux = aux.siguiente;
-//                }
+                this.reOrdenarCreciente(aux, posicion);
             }
         }
     }
     
-    public void reOrdenar(Nodo aux, int posicion){
+    public void reOrdenarCreciente(Nodo aux, int posicion){
         while(aux != null){
             aux.setDato(posicion = posicion + 1);
             aux = aux.siguiente;
         }
     }
     
+    public void reOrdenarDecreciente(Nodo aux, int posicion){
+        while(aux != null){
+            aux.setDato(posicion = (int)aux.getDato() - 1);
+            aux = aux.siguiente;
+        }
+    }    
+    
     public void borrarNodoPosicion(int posicion){
         if(posicion == 1){
-            this.borrarInicio();
+            Nodo nodoLinea = this.borrarInicio();
+            this.reOrdenarDecreciente(nodoLinea, posicion);
         } 
         else if(posicion == getCantidadElementos()){
             this.borrarFinal();
@@ -153,28 +157,30 @@ public class ListaLinea {
                 aux2 = aux;
                 aux = aux.siguiente;
             }
-            aux2.siguiente = aux.siguiente;
-            //aux.siguiente = aux2.siguiente;
-            
-            this.cantidadElementos = this.cantidadElementos + 1;
-            aux.setDato(posicion);
-            while(aux != null){
-                aux.setDato(posicion = posicion + 1);
-                aux = aux.siguiente;
-            }
+            aux2.siguiente = aux.siguiente;           
+            this.cantidadElementos = this.cantidadElementos - 1;
+            aux = aux.siguiente;
+            this.reOrdenarDecreciente(aux, posicion);
+//            while(aux != null){
+//                aux.setDato(posicion = (int)aux.getDato() - 1);
+//                aux = aux.siguiente;
+//            }
         }
     }
+    
     //cuidado
-    public void borrarInicio() {     
+    public Nodo borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){
                 this.vaciar();
+                this.cantidadElementos = 0;
             }
             else{                     
-                //this.primero=this.primero.siguiente;
-                this.primero.setSiguiente(this.primero.getSiguiente());
+                this.primero = (NodoLinea)this.primero.siguiente;
+                this.cantidadElementos = this.cantidadElementos - 1;
             } 
         }
+        return this.primero;
     }
     
     public void borrarFinal(){
@@ -188,6 +194,7 @@ public class ListaLinea {
                 }    
                 this.ultimo = (NodoLinea)aux;
                 this.ultimo.setSiguiente(null);
+                this.cantidadElementos = this.cantidadElementos - 1;
             }
         }
     }
