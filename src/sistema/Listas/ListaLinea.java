@@ -59,6 +59,25 @@ public class ListaLinea {
         }
     }
     
+    public void mostrarPorLinea(int posicionLinea) {
+        NodoLinea aux = obtenerNodoPorNombre(posicionLinea);
+        if(aux == null){
+            System.out.println("Texto Vacio");
+        }
+        else {        
+            System.out.print("Linea: " + aux.getDato()+" - ");
+            NodoPalabra aux2 = aux.getListaPalabra().primero;
+            if(aux2 == null){
+                System.out.println();
+            }
+            while(aux2 != null){
+                System.out.print(aux2.getDato()+" ");
+                aux2 = (NodoPalabra)aux2.siguiente;
+            }
+            System.out.println();
+        }
+    }    
+    
     public String reOrdenarPalabrasEnLineas(Object posicionLinea, Object palabraAIngresar, int posicionPalabra){
         String retorno = "";
         NodoLinea nodoLinea = this.obtenerNodoPorNombre(posicionLinea);
@@ -103,13 +122,22 @@ public class ListaLinea {
         return retorno;
     }
 
-    public void borrarOcurrenciaPalabra(Object dato){
+    public void borrarOcurrenciaPalabraTexto(Object dato){
         NodoLinea aux = this.primero;
         while (aux != null){
             aux.getListaPalabra().borrarElemento(dato);
             aux = (NodoLinea)aux.siguiente;
         }
     }
+    public void borrarOcurrenciaPalabraLineaPorPosicion(int posicionLinea, int posicionPalabra){
+        NodoLinea aux = obtenerNodoPorNombre(posicionLinea);
+        aux.getListaPalabra().borrarNodoPosicion(posicionPalabra);  
+    }
+    
+    public void borrarOcurrenciaPalabraLineaPorNombre(int posicionLinea, String palabraABorrar){
+        NodoLinea aux = obtenerNodoPorNombre(posicionLinea);
+        aux.getListaPalabra().borrarElemento(palabraABorrar);
+    }    
       
     public void agregarFinal(Object dato) {
         NodoLinea nuevo = new NodoLinea(dato);   
@@ -208,7 +236,6 @@ public class ListaLinea {
         }
     }
     
-    //cuidado
     public Nodo borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){

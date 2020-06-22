@@ -105,7 +105,7 @@ public class ListaPalabra {
         }
     }
     
-    public void borrarInicio() {     
+    public Nodo borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){
                 this.vaciar();
@@ -114,6 +114,7 @@ public class ListaPalabra {
                 this.primero = (NodoPalabra)this.primero.siguiente;
             } 
         }
+        return this.primero;
     }    
     
     public void borrarFinal(){
@@ -168,5 +169,26 @@ public class ListaPalabra {
             aux = aux.getSiguiente();
         }
         return null;
+    } 
+    
+    public void borrarNodoPosicion(int posicion){
+        if(posicion == 1){
+            Nodo nodoPalabra = this.borrarInicio();
+        } 
+        else if(posicion == getCantidadElementos()){
+            this.borrarFinal();
+        }
+        else if(posicion > 1 && posicion < getCantidadElementos()){
+            Nodo aux, aux2;
+            aux = this.primero;
+            aux2 = this.primero.siguiente;
+
+            for(int i=1; i< posicion; i++){
+                aux2 = aux;
+                aux = aux.siguiente;
+            }
+            aux2.siguiente = aux.siguiente;           
+            this.cantidadElementos = this.cantidadElementos - 1;
+        }
     }    
 }

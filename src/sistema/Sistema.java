@@ -244,25 +244,6 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno borrarOcurrenciasPalabraEnTexto(String palabraABorrar) {
-        Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
-        if(nodoUnidad != null){//si unidad existe procedemos 
-            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
-            if(nodoCarpeta != null){ //encontro carpeta
-                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
-                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
-                nodoDocumento.getListaLinea().borrarOcurrenciaPalabra(palabraABorrar);
-            }
-        }
-        else {
-            ret.valorString = "La ubicación no existe";
-        } 
-        return ret;
-    }
-
-    @Override
     public Retorno imprimirTexto() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
@@ -351,22 +332,94 @@ public class Sistema implements ISistema{
         }        
         return ret;
     }
-
+    
+    @Override
+    public Retorno borrarOcurrenciasPalabraEnTexto(String palabraABorrar) {
+        Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos 
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+                nodoDocumento.getListaLinea().borrarOcurrenciaPalabraTexto(palabraABorrar);
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        } 
+        return ret;
+    }
+    
     @Override
     public Retorno borrarPalabra(int posicionLinea, int posicionPalabra) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos 
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas(); //obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+                nodoDocumento.getListaLinea().borrarOcurrenciaPalabraLineaPorPosicion(posicionLinea, posicionPalabra);
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        }         
         return ret;
     }
 
     @Override
     public Retorno borrarOcurrenciasPalabraEnLinea(int posicionLinea, String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos 
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas(); //obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento(); //obtenemos lista documentos solamente una vez
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+                nodoDocumento.getListaLinea().borrarOcurrenciaPalabraLineaPorNombre(posicionLinea, palabraABorrar);
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        }         
         return ret;
     }
 
     @Override
     public Retorno imprimirLinea(int posicionLinea) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+                if(nodoDocumento != null){
+                    NodoLinea nodolinea = nodoDocumento.getListaLinea().obtenerNodoPorNombre(posicionLinea);
+                    if(nodolinea != null){
+                        nodoDocumento.getListaLinea().mostrarPorLinea(posicionLinea);
+                    }
+                    else {
+                        ret.valorString = "No existe el Linea";
+                    }
+                }
+                else {
+                    ret.valorString = "No existe el documento";
+                }
+            }
+            else {
+                ret.valorString = "No hay carpetas en la estructura";
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        }        
         return ret;
     }
 
@@ -390,7 +443,8 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno imprimirTextoIncorrecto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Retorno ret = new Retorno (Retorno.Resultado.OK);
+        return ret;
     }
     
 }
