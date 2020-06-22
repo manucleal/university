@@ -4,11 +4,13 @@ import sistema.Interfaces.ISistema;
 import sistema.Listas.ListaCarpeta;
 import sistema.Listas.ListaDocumento;
 import sistema.Listas.ListaLinea;
+import sistema.Listas.ListaPalabra;
 import sistema.Listas.ListaUnidad;
 import sistema.Nodos.Nodo;
 import sistema.Nodos.NodoCarpeta;
 import sistema.Nodos.NodoDocumento;
 import sistema.Nodos.NodoLinea;
+import sistema.Nodos.NodoPalabra;
 import sistema.Nodos.NodoUnidad;
 
 public class Sistema implements ISistema{
@@ -159,7 +161,7 @@ public class Sistema implements ISistema{
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
                 
                 ListaLinea listaLineas = nodoDocumento.getListaLinea();//nos posicionamos en lista lieneas solamente una vez
-                int nroLinea = listaLineas.getCantidadElementos() + 1;                
+                int nroLinea = listaLineas.getCantidadElementos() + 1;               
                 listaLineas.agregarFinal(nroLinea);
             }
         }
@@ -183,7 +185,7 @@ public class Sistema implements ISistema{
                 ListaLinea listaLineas =  nodoDocumento.getListaLinea();//obtenemos lista palabras solamente una vez 
                 
                 if(posicionLinea >= 1 && posicionLinea <= (listaLineas.getCantidadElementos() + 1)){
-                    listaLineas.agregarNodoPosicion(posicionLinea, posicionLinea);    
+                    listaLineas.agregarNodoPosicion(posicionLinea, posicionLinea);   
                 }
                 else {
                     ret.valorString = "La posición no es valida";
@@ -297,8 +299,24 @@ public class Sistema implements ISistema{
             if(nodoCarpeta != null){ //encontro carpeta
                 ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
                 NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
-                NodoLinea nodoLinea = nodoDocumento.getListaLinea().obtenerNodoLineaPorNombre(posicionLinea);
-                nodoLinea.getListaPalabra().agregarNodoPosicion(palabraAIngresar, posicionPalabra);
+                NodoLinea nodoLinea = nodoDocumento.getListaLinea().obtenerNodoPorNombre(posicionLinea);
+                if(nodoLinea != null){
+                    ListaPalabra listaPalabras = nodoLinea.getListaPalabra();
+                    if(listaPalabras.getMAX_CANT_PALABRAS_X_LINEA() > listaPalabras.getCantidadElementos()){
+                        if(posicionPalabra >= 1 && posicionPalabra <= (listaPalabras.getCantidadElementos() + 1)){
+                            listaPalabras.agregarNodoPosicion(palabraAIngresar, posicionPalabra);
+                        }
+                        else {
+                            ret.valorString = "la posición de la palabra no es válida";
+                        }
+                    }
+                    else {
+                        ret.valorString = "Superara la cantidad máxima de palabras por línea -> Cantidad permitida: " + listaPalabras.getMAX_CANT_PALABRAS_X_LINEA();
+                    }
+                }
+                else {
+                    ret.valorString = "La posición de la línea no es válida";
+                }
             }
             else {
                 ret.valorString = "No hay carpetas en la estructura";
@@ -313,6 +331,53 @@ public class Sistema implements ISistema{
     @Override
     public Retorno insertarPalabraYDesplazar(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+                ListaLinea listaLineas = nodoDocumento.getListaLinea();//nos posicionamos en lista lieneas solamente una vez
+                NodoLinea nodoLinea = listaLineas.obtenerNodoPorNombre(posicionLinea);
+                if(nodoLinea != null){
+                    ListaPalabra listaPalabras = nodoLinea.getListaPalabra();
+                    listaPalabras.agregarNodoPosicion(palabraAIngresar, posicionPalabra);
+                    if(listaPalabras.getMAX_CANT_PALABRAS_X_LINEA() < listaPalabras.getCantidadElementos()){                     
+                        //obtendo Object final y lo guardo en variable temporal
+                        Object temporal = listaPalabras.getUltimo().dato;
+                        //elimino nodo final de linea llena
+                        listaPalabras.borrarFinal();
+                        NodoLinea nodoLineaSiguiente = listaLineas.obtenerNodoPorNombre(posicionLinea + 1);
+                        nodoLineaSiguiente.getListaPalabra().agregarInicio(temporal);
+                        
+                        
+                        //esto sucede en la ultima linena, solamente ahi se genera una linea nueva
+                        //NodoLinea reflienaNueva = listaLineas.agregarNodoPosicion(posicionLinea + 1, posicionLinea + 1);//agreggo nueva linea
+                   }
+//                    if(listaPalabras.getMAX_CANT_PALABRAS_X_LINEA() > listaPalabras.getCantidadElementos()){
+//                        if(posicionPalabra >= 1 && posicionPalabra <= (listaPalabras.getCantidadElementos() + 1)){
+//                            listaPalabras.agregarNodoPosicion(palabraAIngresar, posicionPalabra);
+//                        }
+//                        else {
+//                            ret.valorString = "la posición de la palabra no es válida";
+//                        }
+//                    }
+//                    else {
+//                        ret.valorString = "Superara la cantidad máxima de palabras por línea -> Cantidad permitida: " + listaPalabras.getMAX_CANT_PALABRAS_X_LINEA();
+//                    }
+                }
+                else {
+                    ret.valorString = "La posición de la línea no es válida";
+                }
+            }
+            else {
+                ret.valorString = "No hay carpetas en la estructura";
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        }        
         return ret;
     }
 

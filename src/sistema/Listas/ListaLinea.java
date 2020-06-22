@@ -6,7 +6,6 @@ import sistema.Nodos.NodoPalabra;
 public class ListaLinea {
     NodoLinea primero;
     NodoLinea ultimo;
-    
     int cantidadElementos;
     
     public ListaLinea() {
@@ -18,7 +17,7 @@ public class ListaLinea {
     public ListaLinea(NodoLinea primero, NodoLinea ultimo) {
         this.primero = primero;
         this.ultimo = ultimo;
-        this.cantidadElementos = 0;
+        this.cantidadElementos = 1;
     }
     
     public int getCantidadElementos() {
@@ -94,7 +93,7 @@ public class ListaLinea {
         return nuevo;
     }
     
-    public void agregarNodoPosicion(Object dato, int posicion){
+    public NodoLinea agregarNodoPosicion(Object dato, int posicion){
         NodoLinea nuevo = new NodoLinea(dato);
         if (this.esVacia()){
             this.primero = nuevo;
@@ -124,16 +123,17 @@ public class ListaLinea {
                 this.reOrdenarCreciente(aux, posicion);
             }
         }
+        return nuevo;
     }
     
-    public void reOrdenarCreciente(Nodo aux, int posicion){
+    private void reOrdenarCreciente(Nodo aux, int posicion){
         while(aux != null){
             aux.setDato(posicion = posicion + 1);
             aux = aux.siguiente;
         }
     }
     
-    public void reOrdenarDecreciente(Nodo aux, int posicion){
+    private void reOrdenarDecreciente(Nodo aux, int posicion){
         while(aux != null){
             aux.setDato(posicion = (int)aux.getDato() - 1);
             aux = aux.siguiente;
@@ -161,10 +161,6 @@ public class ListaLinea {
             this.cantidadElementos = this.cantidadElementos - 1;
             aux = aux.siguiente;
             this.reOrdenarDecreciente(aux, posicion);
-//            while(aux != null){
-//                aux.setDato(posicion = (int)aux.getDato() - 1);
-//                aux = aux.siguiente;
-//            }
         }
     }
     
@@ -199,7 +195,7 @@ public class ListaLinea {
         }
     }
     
-    public NodoLinea obtenerNodoLineaPorNombre(Object dato) {
+    public NodoLinea obtenerNodoPorNombre(Object dato) {
         Nodo aux = this.primero;
         while (aux != null){
             if (aux.getDato() == dato){

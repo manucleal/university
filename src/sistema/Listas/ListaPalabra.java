@@ -1,6 +1,7 @@
 package sistema.Listas;
 
 import sistema.Nodos.Nodo;
+import sistema.Nodos.NodoLinea;
 import sistema.Nodos.NodoPalabra;
 
 public class ListaPalabra {
@@ -13,19 +14,27 @@ public class ListaPalabra {
         this.primero = null;
         this.ultimo = null;
         this.cantidadElementos = 0;
-        this.MAX_CANT_PALABRAS_X_LINEA = 0;
+        this.MAX_CANT_PALABRAS_X_LINEA = 3;
     }
 
     public ListaPalabra(NodoPalabra primero, NodoPalabra ultimo, int MAX_CANT_PALABRAS_X_LINEA) {
         this.primero = primero;
         this.ultimo = ultimo;
-        this.cantidadElementos = 0;
+        this.cantidadElementos = 1;
         this.MAX_CANT_PALABRAS_X_LINEA = MAX_CANT_PALABRAS_X_LINEA;
+    }
+
+    public NodoPalabra getUltimo() {
+        return ultimo;
     }
     
     public int getCantidadElementos() {
         return cantidadElementos;
     }
+    
+    public int getMAX_CANT_PALABRAS_X_LINEA() {
+        return MAX_CANT_PALABRAS_X_LINEA;
+    }    
 
     public void setCantidadElementos(int cantidadElementos) {
         this.cantidadElementos = cantidadElementos;
@@ -82,7 +91,7 @@ public class ListaPalabra {
                 Nodo aux, aux2;
                 aux = this.primero;
                 aux2 = this.primero.siguiente;
-                
+                //recorro y me posiciono en posicion anterior a la deseada
                 for(int i=1; i< posicion; i++){
                     aux2 = aux;
                     aux = aux.siguiente;
@@ -113,16 +122,16 @@ public class ListaPalabra {
         if (!this.esVacia()){
             if (this.primero == this.ultimo)
                 this.borrarInicio();
-            else{
+            else {
                 Nodo aux = this.primero;
-                while (aux.getSiguiente().getSiguiente() != null){
-                    aux = aux.getSiguiente();
+                while (aux.siguiente.siguiente != null){
+                    aux = aux.siguiente;
                 }    
                 this.ultimo = (NodoPalabra)aux;
                 this.ultimo.setSiguiente(null);
             }
         }
-    }
+    }    
     
     public NodoPalabra borrarElemento(Object dato){
         Nodo aux = this.obtenerNodoPalabraPorNombre(dato);
