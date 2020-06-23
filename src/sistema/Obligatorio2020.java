@@ -17,9 +17,18 @@ public class Obligatorio2020 {
         //pruebaErroresCrearCarpeta(sist, p1);
         
         //PRUEBAS DE OPERACIONES RELATIVAS A LAS PALABRAS
-        pruebaOperacionesPalabras(sist, p1);
-                
-
+        //pruebaOperacionesPalabras(sist, p1);
+        
+        //PRUEBAS CON DICCIONARIO
+        pruebaDiccionario(sist, p1);
+    }
+    public static void pruebaDiccionario(Sistema s, Prueba p){
+        p.ver(s.crearSistemaMensajes().resultado, Retorno.Resultado.OK, "Se creo Sistema con una unidad C");
+        p.ver(s.ingresarPalabraDiccionario("Deploy").resultado, Retorno.Resultado.OK, "Ingresando palabra Deploy a diccionario");
+        p.ver(s.ingresarPalabraDiccionario("Frontend").resultado, Retorno.Resultado.OK, "Ingresando palabra Frontend a diccionario");
+        p.ver(s.ingresarPalabraDiccionario("Backend").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.borrarPalabraDiccionario("Frontend").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.imprimirDiccionario().resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
     }
     
     public static void pruebaOperacionesPalabras(Sistema s, Prueba p){
@@ -106,7 +115,6 @@ public class Obligatorio2020 {
         //p.ver(s.imprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
     }
     
-
     public static void pruebaSinErrores(Sistema s, Prueba p){
         p.ver(s.crearSistemaMensajes().resultado, Retorno.Resultado.OK, "Se creo Sistema con una unidad C");
         p.ver(s.agregarCarpeta("C", "Personal").resultado, Retorno.Resultado.OK, "Se creo carpeta -> Personal en Unidad C");

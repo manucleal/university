@@ -6,15 +6,14 @@ import sistema.Listas.ListaDocumento;
 import sistema.Listas.ListaLinea;
 import sistema.Listas.ListaPalabra;
 import sistema.Listas.ListaUnidad;
-import sistema.Nodos.Nodo;
 import sistema.Nodos.NodoCarpeta;
 import sistema.Nodos.NodoDocumento;
 import sistema.Nodos.NodoLinea;
-import sistema.Nodos.NodoPalabra;
 import sistema.Nodos.NodoUnidad;
 
 public class Sistema implements ISistema{
     public ListaUnidad unidades;
+    //public ListaDiccionario diccionario;
             
     //se inicia el sistema con una unidades C por defecto
     @Override
@@ -426,18 +425,38 @@ public class Sistema implements ISistema{
     @Override
     public Retorno ingresarPalabraDiccionario(String palabraAIngresar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        nodoUnidad.getListaDiccionario().agregarInicio(palabraAIngresar);
+        
+//this.diccionario.
+//        if(nodoUnidad != null){//si unidad existe procedemos
+//            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+//            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+//            if(nodoCarpeta != null){ //encontro carpeta
+//                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
+//                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+//                NodoLinea nodoLinea = nodoDocumento.getListaLinea().obtenerNodoPorNombre(posicionLinea);
+//                if(nodoLinea != null){
+//                    ListaPalabra listaPalabras = nodoLinea.getListaPalabra();
+//                    if(listaPalabras.getMAX_CANT_PALABRAS_X_LINEA() > listaPalabras.getCantidadElementos()){
+//                        if(posicionPalabra >= 1 && posicionPalabra <= (listaPalabras.getCantidadElementos() + 1)){
+//                            listaPalabras.agregarNodoPosicion(palabraAIngresar, posicionPalabra);        
         return ret;
     }
 
     @Override
     public Retorno borrarPalabraDiccionario(String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        nodoUnidad.getListaDiccionario().borrarOcurrenciaPalabraTexto(palabraABorrar);
         return ret;
     }
 
     @Override
     public Retorno imprimirDiccionario() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        nodoUnidad.getListaDiccionario().mostrar();
         return ret;
     }
 
