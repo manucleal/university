@@ -39,6 +39,35 @@ public class ListaDiccionario {
         }
     }
     
+    public void insertarOrdenado(Object dato) {
+
+        NodoPalabra nuevo = new NodoPalabra(dato);
+
+        if (primero == null) {
+            primero = nuevo;
+        } else {
+            if (String.valueOf(dato).compareTo(String.valueOf(primero.getDato())) < 0) {
+                nuevo.setSiguiente(primero);
+                primero = nuevo;
+            } else {
+                NodoPalabra reco = primero;
+                NodoPalabra atras = primero;
+
+                while (String.valueOf(dato).compareTo(String.valueOf(reco.getDato())) >= 0 && reco.getSiguiente() != null) {
+                    atras = reco;
+                    reco = (NodoPalabra)reco.getSiguiente();
+                }
+
+                if (String.valueOf(dato).compareTo(String.valueOf(reco.getDato())) >= 0) {
+                    reco.setSiguiente(nuevo);
+                } else {
+                    nuevo.setSiguiente(reco);
+                    atras.setSiguiente(nuevo);
+                }
+            }
+        }
+    }
+    
     public Nodo borrarInicio() {     
         if (!this.esVacia()){
             if (this.primero == this.ultimo){

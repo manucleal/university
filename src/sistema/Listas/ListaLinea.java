@@ -73,7 +73,7 @@ public class ListaLinea {
                 }
                 while(aux2 != null){                    
                     if(!diccionario.buscarElemento(aux2.getDato())){
-                        System.out.print(aux2.getDato()+" ");
+                       System.out.print(aux2.getDato()+" ");
                     }
                     aux2 = (NodoPalabra)aux2.siguiente;
                 }
@@ -81,7 +81,8 @@ public class ListaLinea {
                 aux = (NodoLinea)aux.siguiente;
             }
         }
-    }    
+    }
+
     
     public void mostrarPorLinea(int posicionLinea) {
         NodoLinea aux = obtenerNodoPorNombre(posicionLinea);

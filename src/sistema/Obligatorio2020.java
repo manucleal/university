@@ -43,11 +43,15 @@ public class Obligatorio2020 {
         p.ver(s.IngresarPalabraDiccionario("Frontend").resultado, Retorno.Resultado.OK, "Ingresando palabra Frontend a diccionario");
         p.ver(s.IngresarPalabraDiccionario("Backend").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
         p.ver(s.IngresarPalabraDiccionario("Emanuel").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
-        p.ver(s.BorrarPalabraDiccionario("Frontend").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.IngresarPalabraDiccionario("Alfredo").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.IngresarPalabraDiccionario("Cecilia").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.IngresarPalabraDiccionario("Fernanda").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.IngresarPalabraDiccionario("Gonzalo").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
+        p.ver(s.BorrarPalabraDiccionario("frontend").resultado, Retorno.Resultado.OK, "Ingresando palabra Backend a diccionario");
         
         p.ver(s.ImprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
         
-        p.ver(s.ImprimirDiccionario().resultado, Retorno.Resultado.OK, "Imprimir palabras del diccionario");
+        p.ver(s.ImprimirDiccionario().resultado, Retorno.Resultado.OK, "Imprimir palabras del diccionario alfabeticamente");
         
         p.ver(s.ImprimirTextoIncorrecto().resultado, Retorno.Resultado.OK, "Imprimir texto que no se encunetra en el diccionario");
         

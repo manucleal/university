@@ -422,8 +422,8 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno IngresarPalabraDiccionario(String palabraAIngresar) {
-        Retorno ret = new Retorno (Retorno.Resultado.OK);        
-        this.diccionario.agregarInicio(palabraAIngresar);       
+        Retorno ret = new Retorno (Retorno.Resultado.OK);           
+        this.diccionario.insertarOrdenado(palabraAIngresar);
         return ret;
     }
 
