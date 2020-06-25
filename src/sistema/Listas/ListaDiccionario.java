@@ -7,15 +7,13 @@ public class ListaDiccionario {
     NodoPalabra primero;
     NodoPalabra ultimo;
     
-
-    ListaDiccionario(NodoPalabra primero, NodoPalabra ultimo) {
-        this.primero = primero;
-        this.ultimo = ultimo;
-    }
-    
     public ListaDiccionario(){
         this.primero = null;
         this.ultimo = null;
+    }
+
+    public NodoPalabra getPrimero() {
+        return primero;
     }
     
     public void vaciar() {
@@ -34,7 +32,7 @@ public class ListaDiccionario {
         }
         else {        
             while (aux != null){
-                System.out.print(aux.getDato()+" - ");
+                System.out.print(aux.getDato());
                 System.out.println();
                 aux = (NodoPalabra)aux.siguiente;
             }
@@ -87,6 +85,7 @@ public class ListaDiccionario {
             aux = (NodoPalabra)aux.siguiente;
         }
     }
+    
     public NodoPalabra borrarElemento(Object dato){
         Nodo aux = this.obtenerNodoPalabraPorNombre(dato);
         if(!this.esVacia()){
@@ -125,5 +124,16 @@ public class ListaDiccionario {
             aux = aux.getSiguiente();
         }
         return null;
+    }
+
+    public boolean buscarElemento(Object dato) {
+        NodoPalabra aux = this.primero;
+        while (aux != null){
+            if (aux.getDato() == dato){
+                return true;
+            }
+            aux = (NodoPalabra)aux.siguiente;
+        }     
+        return false;
     }    
 }

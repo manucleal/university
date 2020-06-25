@@ -59,6 +59,30 @@ public class ListaLinea {
         }
     }
     
+    public void mostrarPalabrasNoDiccionario(ListaDiccionario diccionario) {
+        NodoLinea aux = this.primero;
+        if(aux == null){
+            System.out.println("Texto Vacio");
+        }
+        else {        
+            while (aux != null){
+                System.out.print("Linea: " + aux.getDato()+" - ");
+                NodoPalabra aux2 = aux.getListaPalabra().primero;
+                if(aux2 == null){
+                    System.out.println();
+                }
+                while(aux2 != null){                    
+                    if(!diccionario.buscarElemento(aux2.getDato())){
+                        System.out.print(aux2.getDato()+" ");
+                    }
+                    aux2 = (NodoPalabra)aux2.siguiente;
+                }
+                System.out.println();
+                aux = (NodoLinea)aux.siguiente;
+            }
+        }
+    }    
+    
     public void mostrarPorLinea(int posicionLinea) {
         NodoLinea aux = obtenerNodoPorNombre(posicionLinea);
         if(aux == null){

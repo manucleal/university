@@ -2,39 +2,37 @@ package sistema;
 
 import sistema.Interfaces.ISistema;
 import sistema.Listas.ListaCarpeta;
+import sistema.Listas.ListaDiccionario;
 import sistema.Listas.ListaDocumento;
 import sistema.Listas.ListaLinea;
 import sistema.Listas.ListaPalabra;
 import sistema.Listas.ListaUnidad;
-import sistema.Nodos.NodoCarpeta;
-import sistema.Nodos.NodoDocumento;
-import sistema.Nodos.NodoLinea;
-import sistema.Nodos.NodoUnidad;
+import sistema.Nodos.*;
 
 public class Sistema implements ISistema{
     public ListaUnidad unidades;
-    //public ListaDiccionario diccionario;
+    public ListaDiccionario diccionario;
             
-    //se inicia el sistema con una unidades C por defecto
     @Override
-    public Retorno crearSistemaMensajes() {
+    public Retorno CrearSistemaMensajes() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         if(this.unidades == null){
             this.unidades = new ListaUnidad();
             this.unidades.agregarInicio("C");
+            this.diccionario = new ListaDiccionario();
         }
         return ret;
     }
 
     @Override
-    public Retorno destruirSistemaMensajes() {
+    public Retorno DestruirSistemaMensajes() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);    
         this.unidades.vaciar();
         return ret;
     }
 
     @Override
-    public Retorno agregarCarpeta(String unidad, String carpeta) {
+    public Retorno AgregarCarpeta(String unidad, String carpeta) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
                 
@@ -58,7 +56,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno eliminarCarpeta(String unidad, String carpeta) {
+    public Retorno EliminarCarpeta(String unidad, String carpeta) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         
@@ -77,7 +75,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno agregarMensaje(String unidad, String carpeta, String mensaje) {
+    public Retorno AgregarMensaje(String unidad, String carpeta, String mensaje) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -104,7 +102,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno eliminarMensaje(String unidad, String carpeta, String mensaje) {
+    public Retorno EliminarMensaje(String unidad, String carpeta, String mensaje) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -128,7 +126,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno listarEstructura(String unidad, String carpeta) {
+    public Retorno ListarEstructura(String unidad, String carpeta) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
         if(nodoUnidad != null){//si unidad existe procedemos
@@ -149,7 +147,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno insertarLinea() {
+    public Retorno InsertarLinea() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -171,7 +169,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno insertarLineaEnPosicion(int posicionLinea) {
+    public Retorno InsertarLineaEnPosicion(int posicionLinea) {
         //(posicionLinea >= 1) y (posicionLinea <= cantidad de líneas + 1
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
@@ -198,7 +196,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno borrarLinea(int posicionLinea) {
+    public Retorno BorrarLinea(int posicionLinea) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -224,7 +222,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno borrarTodo() {
+    public Retorno BorrarTodo() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -243,7 +241,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno imprimirTexto() {
+    public Retorno ImprimirTexto() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos
@@ -270,7 +268,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno insertarPalabraEnLinea(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+    public Retorno InsertarPalabraEnLinea(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos
@@ -309,7 +307,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno insertarPalabraYDesplazar(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
+    public Retorno InsertarPalabraYDesplazar(int posicionLinea, int posicionPalabra, String palabraAIngresar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos
@@ -333,7 +331,7 @@ public class Sistema implements ISistema{
     }
     
     @Override
-    public Retorno borrarOcurrenciasPalabraEnTexto(String palabraABorrar) {
+    public Retorno BorrarOcurrenciasPalabraEnTexto(String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -352,7 +350,7 @@ public class Sistema implements ISistema{
     }
     
     @Override
-    public Retorno borrarPalabra(int posicionLinea, int posicionPalabra) {
+    public Retorno BorrarPalabra(int posicionLinea, int posicionPalabra) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -371,7 +369,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno borrarOcurrenciasPalabraEnLinea(int posicionLinea, String palabraABorrar) {
+    public Retorno BorrarOcurrenciasPalabraEnLinea(int posicionLinea, String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos 
@@ -390,7 +388,7 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno imprimirLinea(int posicionLinea) {
+    public Retorno ImprimirLinea(int posicionLinea) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
         NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
         if(nodoUnidad != null){//si unidad existe procedemos
@@ -423,46 +421,50 @@ public class Sistema implements ISistema{
     }
 
     @Override
-    public Retorno ingresarPalabraDiccionario(String palabraAIngresar) {
-        Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
-        nodoUnidad.getListaDiccionario().agregarInicio(palabraAIngresar);
-        
-//this.diccionario.
-//        if(nodoUnidad != null){//si unidad existe procedemos
-//            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
-//            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
-//            if(nodoCarpeta != null){ //encontro carpeta
-//                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
-//                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
-//                NodoLinea nodoLinea = nodoDocumento.getListaLinea().obtenerNodoPorNombre(posicionLinea);
-//                if(nodoLinea != null){
-//                    ListaPalabra listaPalabras = nodoLinea.getListaPalabra();
-//                    if(listaPalabras.getMAX_CANT_PALABRAS_X_LINEA() > listaPalabras.getCantidadElementos()){
-//                        if(posicionPalabra >= 1 && posicionPalabra <= (listaPalabras.getCantidadElementos() + 1)){
-//                            listaPalabras.agregarNodoPosicion(palabraAIngresar, posicionPalabra);        
+    public Retorno IngresarPalabraDiccionario(String palabraAIngresar) {
+        Retorno ret = new Retorno (Retorno.Resultado.OK);        
+        this.diccionario.agregarInicio(palabraAIngresar);       
         return ret;
     }
 
     @Override
-    public Retorno borrarPalabraDiccionario(String palabraABorrar) {
+    public Retorno BorrarPalabraDiccionario(String palabraABorrar) {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
-        nodoUnidad.getListaDiccionario().borrarOcurrenciaPalabraTexto(palabraABorrar);
+        this.diccionario.borrarOcurrenciaPalabraTexto(palabraABorrar);
         return ret;
     }
 
     @Override
-    public Retorno imprimirDiccionario() {
+    public Retorno ImprimirDiccionario() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
-        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
-        nodoUnidad.getListaDiccionario().mostrar();
+        this.diccionario.mostrar();
         return ret;
     }
 
     @Override
-    public Retorno imprimirTextoIncorrecto() {
+    public Retorno ImprimirTextoIncorrecto() {
         Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre("C");
+        if(nodoUnidad != null){//si unidad existe procedemos
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+            NodoCarpeta nodoCarpeta = listaCarpetas.obtenerNodoPorNombre("Universidad");
+            if(nodoCarpeta != null){ //encontro carpeta
+                ListaDocumento listaDocumentos = nodoCarpeta.getListaDocumento();
+                NodoDocumento nodoDocumento = listaDocumentos.obtenerNodoPorNombre("Programacion");
+                if(nodoDocumento != null){
+                    nodoDocumento.getListaLinea().mostrarPalabrasNoDiccionario(this.diccionario);
+                }
+                else {
+                    ret.valorString = "No existe el documento";
+                }
+            }
+            else {
+                ret.valorString = "No hay carpetas en la estructura";
+            }
+        }
+        else {
+            ret.valorString = "La ubicación no existe";
+        }        
         return ret;
     }
     
