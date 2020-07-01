@@ -27,4 +27,5 @@ public interface ISistema {
     Retorno ImprimirTextoIncorrecto();
     Retorno CargarDistancias(int[][] Ciudades);
     Retorno BuscarCamino ( int [][] M, String origen, String destino);
+    Retorno mostrarestructuracompleta(String unidad);
 }

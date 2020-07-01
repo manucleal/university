@@ -1,7 +1,5 @@
 package sistema;
 
-import java.util.HashMap;
-import java.util.Map;
 import sistema.Interfaces.ISistema;
 import sistema.Listas.ListaCarpeta;
 import sistema.Listas.ListaDiccionario;
@@ -23,8 +21,7 @@ public class Sistema implements ISistema{
 
     public void setMatriz(int[][] matriz) {
         this.matriz = matriz;
-    }
-    
+    }    
             
     @Override
     public Retorno CrearSistemaMensajes() {
@@ -33,7 +30,7 @@ public class Sistema implements ISistema{
             this.unidades = new ListaUnidad();
             this.unidades.agregarInicio("C");
             this.diccionario = new ListaDiccionario();
-            this.cantidadCiudades = 5;
+            this.cantidadCiudades = 7;
             this.matriz = new int[this.cantidadCiudades][this.cantidadCiudades];
         }
         return ret;
@@ -437,8 +434,15 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno IngresarPalabraDiccionario(String palabraAIngresar) {
-        Retorno ret = new Retorno (Retorno.Resultado.OK);           
-        this.diccionario.insertarOrdenado(palabraAIngresar);
+        Retorno ret = new Retorno (Retorno.Resultado.OK);
+
+        NodoPalabra palabra = this.diccionario.obtenerNodoPalabraPorNombre(palabraAIngresar);
+        if(palabra == null){
+            this.diccionario.insertarOrdenado(palabraAIngresar);
+        }
+        else {
+            ret.valorString = "Palabra ya existe";
+        }
         return ret;
     }
 
@@ -486,67 +490,78 @@ public class Sistema implements ISistema{
     @Override
     public Retorno CargarDistancias(int[][] Ciudades) {
         Retorno ret = new Retorno (Retorno.Resultado.OK); 
+        
+        Ciudades[1][3] = 9;
+        Ciudades[3][1] = 9;
+        
+        Ciudades[5][6] = 9;
+        Ciudades[6][5] = 9;  
 
-        Ciudades[0][1] = 5;
-        Ciudades[1][0] = 5;
-    
-        Ciudades[0][2] = 2;
-        Ciudades[2][0] = 2;
+        Ciudades[2][5] = 14;
+        Ciudades[5][2] = 14;
         
-        Ciudades[1][2] = 2;
-        Ciudades[2][1] = 2;
+        Ciudades[1][6] = 14;
+        Ciudades[6][1] = 14;        
         
-        Ciudades[1][3] = 3;
-        Ciudades[3][1] = 3;
+        Ciudades[1][2] = 1;
+        Ciudades[2][1] = 1;
         
-        Ciudades[2][4] = 4;
-        Ciudades[4][2] = 4;
+        Ciudades[2][3] = 10;
+        Ciudades[3][2] = 10;
+              
+        Ciudades[3][6] = 2;
+        Ciudades[3][3] = 2;
         
-        Ciudades[3][4] = 1;
-        Ciudades[4][3] = 1;
+        Ciudades[3][5] = 3;
+        Ciudades[5][3] = 3; 
         
-        Ciudades[1][4] = 3;                                                                   
-        Ciudades[4][1] = 3;
+        Ciudades[3][4] = 11;
+        Ciudades[4][3] = 11;
+
+        Ciudades[5][4] = 6;
+        Ciudades[4][5] = 6;
         
-        Ciudades[0][3] = 4;
-        Ciudades[3][0] = 4;
+        Ciudades[2][4] = 15;
+        Ciudades[4][2] = 15;        
         
-        Ciudades[2][3] = 4;
-        Ciudades[3][2] = 4;
-                
-        //        this.ciudades[0] =  "Monteivideo";
-//        this.ciudades[1] =  "Alemania";
-//        this.ciudades[2] =  "Argentina";
+   
+
+       
         
-//        this.llenarMatriz("Montevideo", "CDMexico", 20);
-//        this.llenarMatriz("Montevideo", "SaoPaulo", 10);
-//        this.llenarMatriz("Montevideo", "Santiago", 5);
-//        this.llenarMatriz("Montevideo", "Medellin", 7);
-//        this.llenarMatriz("Montevideo", "BuenosAires", 3);
+//        Ciudades[0][1] = 5;
+//        Ciudades[1][0] = 5;
+//    
+//        Ciudades[0][2] = 2;
+//        Ciudades[2][0] = 2;
 //        
-//        this.llenarMatriz("Medellin", "Lima", 3);
+//        Ciudades[1][2] = 2;
+//        Ciudades[2][1] = 2;
 //        
-//        this.llenarMatriz("Medellin", "SaoPaulo", 0);
-//        this.llenarMatriz("Santiago", "SaoPaulo", 0);
-//        this.llenarMatriz("Santiago", "NewYork", 0);
+//        Ciudades[1][3] = 3;
+//        Ciudades[3][1] = 3;
+//        
+//        Ciudades[2][4] = 4;
+//        Ciudades[4][2] = 4;
+//        
+//        Ciudades[3][4] = 1;
+//        Ciudades[4][3] = 1;
+//        
+//        Ciudades[1][4] = 3;                                                                   
+//        Ciudades[4][1] = 3;
+//        
+//        Ciudades[0][3] = 4;
+//        Ciudades[3][0] = 4;
+//        
+//        Ciudades[2][3] = 4;
+//        Ciudades[3][2] = 4;
+        
         return ret;
     }
 
 
     @Override
     public Retorno BuscarCamino(int[][] M, String origen, String destino) {
-        Retorno ret = new Retorno (Retorno.Resultado.OK); 
-
-//        Map<String, Integer> nroCiudades = new HashMap<>();
-//        nroCiudades.put("MVD", 0);
-//        nroCiudades.put("POA", 1);
-//        nroCiudades.put("BA", 2);
-//        nroCiudades.put("SP", 3);
-//        nroCiudades.put("NYC", 4);
-//        nroCiudades.put("MIA", 5);
-//        nroCiudades.put("MAD", 6);
-//        int miorigen = nroCiudades.get("POA");
-//        int midestino = nroCiudades.get("SP");
+        Retorno ret = new Retorno (Retorno.Resultado.OK);
         
         int miorigen = this.ciudadAnumero(origen);
         int midestino = this.ciudadAnumero(destino);
@@ -561,7 +576,8 @@ public class Sistema implements ISistema{
                 if(M[miorigen][i] + M[midestino][i] < suma){
                     suma = M[miorigen][i] + M[midestino][i];
                     escala = this.numeroAciudad(i);
-                    ret.valorString = "El camino mas corto es : Origen: " + origen + " escala: " + this.numeroAciudad(i) + " destino: " + destino + " cantidad horas: " + suma;
+                    
+                    ret.valorString = "El camino mas corto es : Origen: " + origen + " escala: " + escala + " destino: " + destino + " cantidad horas: " + suma;
                     //ret.valorString = "El camino mas corto es : " + origen +" - " +escala +" - " + destino;
                 }
             }
@@ -572,25 +588,38 @@ public class Sistema implements ISistema{
     
     // metodos auxiliares    
     private int ciudadAnumero(String Ciudad){
-        if (Ciudad.equals("MVD")) return 0;
-        if (Ciudad.equals("POA")) return 1;
-        if (Ciudad.equals("BA")) return 2;
-        if (Ciudad.equals("SP")) return 3;
-        if (Ciudad.equals("NYC")) return 4;
+//        if (Ciudad.equals("MVD")) return 0;
+//        if (Ciudad.equals("POA")) return 1;
+//        if (Ciudad.equals("BA")) return 2;
+//        if (Ciudad.equals("SP")) return 3;
+//        if (Ciudad.equals("NYC")) return 4;
+//        if (Ciudad.equals("MIA")) return 5;
+//        if (Ciudad.equals("MAD")) return 6; 
+
+        if (Ciudad.equals("MVD")) return 1;
+        if (Ciudad.equals("BAs")) return 2;
+        if (Ciudad.equals("POA")) return 3;
+        if (Ciudad.equals("RIO")) return 4;
         if (Ciudad.equals("MIA")) return 5;
-        if (Ciudad.equals("MAD")) return 6;   
+        if (Ciudad.equals("SP")) return 6;
+        //if (Ciudad.equals("MAD")) return 6;
         return -1;    
     }    
 
     private String numeroAciudad(int numeroCiudad){
-        if (numeroCiudad == 0) return "MVD";
-        if (numeroCiudad == 1) return "POA";
-        if (numeroCiudad == 2) return "BA";
-        if (numeroCiudad == 3) return "SP";
-        if (numeroCiudad == 4) return "NYC";
+        if (numeroCiudad == 1) return "MVD";
+        if (numeroCiudad == 2) return "BAs";
+        if (numeroCiudad == 3) return "POA";
+        if (numeroCiudad == 4) return "RIO";
         if (numeroCiudad == 5) return "MIA";
-        if (numeroCiudad == 6) return "MAD";    
+        if (numeroCiudad == 6) return "SP";
+        //if (numeroCiudad == 6) return "MAD";    
         return "";
+    }
+
+    @Override
+    public Retorno mostrarestructuracompleta(String unidad) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

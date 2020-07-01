@@ -40,7 +40,6 @@ public class ListaDiccionario {
     }
     
     public void insertarOrdenado(Object dato) {
-
         NodoPalabra nuevo = new NodoPalabra(dato);
 
         if (primero == null) {
