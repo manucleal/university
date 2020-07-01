@@ -27,10 +27,11 @@ public class ListaCarpeta {
     }
     
     public void mostrar() {
-        Nodo aux = this.primero;
+        NodoCarpeta aux = this.primero;
         while (aux != null){
             System.out.println(" Nombre Carpeta - " + aux.getDato());
-            aux = aux.siguiente;
+            aux.getListaDocumento().mostrar();
+            aux = (NodoCarpeta)aux.siguiente;
         }
     }
     

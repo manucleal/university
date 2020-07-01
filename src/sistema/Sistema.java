@@ -619,7 +619,16 @@ public class Sistema implements ISistema{
 
     @Override
     public Retorno mostrarestructuracompleta(String unidad) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Retorno ret = new Retorno (Retorno.Resultado.OK);
+        NodoUnidad nodoUnidad = this.unidades.obtenerNodoPorNombre(unidad);
+        if(nodoUnidad != null){//si unidad existe procedemos
+            ListaCarpeta listaCarpetas = nodoUnidad.getListaCarpetas();//obtenemos lista carpetas solamente una vez
+            listaCarpetas.mostrar();
+        }
+        else {
+            ret.valorString = "No existe dicha unidad";
+        }
+        return ret;
     }
     
     

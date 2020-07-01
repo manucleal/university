@@ -29,7 +29,7 @@ public class ListaDocumento {
     public void mostrar() {
         Nodo aux = this.primero;
         while (aux != null){
-            System.out.println("Documento: " + aux.getDato());
+            System.out.println(" Documento: " + aux.getDato());
             aux = aux.siguiente;
         }
     }

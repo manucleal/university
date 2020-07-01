@@ -24,8 +24,8 @@ public class Obligatorio2020 {
         
         
         /***** PRUEBAS DEFENSA *****/
-        //pruebaEstructura(sist, p1);
-        //pruebatopes(sist, p1);
+        pruebaEstructura(sist, p1);
+        pruebatopes(sist, p1);
         pruebaDiccionario(sist, p1);
         
     }
@@ -63,6 +63,10 @@ public class Obligatorio2020 {
     /**** Método que agregue FIN ****/
     
     p.ver(s.BuscarCamino(s.getMatriz(), "MVD", "MIA").resultado, Retorno.Resultado.OK,s.BuscarCamino(s.getMatriz(), "MVD", "MIA").valorString);    
+    
+    /**** NUEVO MÉTODO DEFENSA *****/
+    p.ver(s.mostrarestructuracompleta("C").resultado, Retorno.Resultado.OK, "Mostrando estructura de unidad C");
+    /**** NUEVO MÉTODO DEFENSA *****/
     
     p.ver(s.DestruirSistemaMensajes().resultado, Retorno.Resultado.OK, "Se destruye sistma" );
     p.imprimirResultadosPrueba();
