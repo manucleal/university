@@ -8,7 +8,7 @@ public class Obligatorio2020 {
     
     public static void main(String[] args) {
         Sistema sist = new Sistema();
-        Prueba p1 = new Prueba();
+        Prueba p1 = new Prueba();        
         
         //PRUEBAS GENERALES SIN ERRORES
         //pruebaSinErrores(sist, p1);
@@ -17,12 +17,14 @@ public class Obligatorio2020 {
         //pruebaErroresCrearCarpeta(sist, p1);
         
         //PRUEBAS DE OPERACIONES RELATIVAS A LAS PALABRAS
-        //pruebaOperacionesPalabras(sist, p1);
+        pruebaOperacionesPalabras(sist, p1);
         
         //PRUEBAS CON DICCIONARIO
-        pruebaDiccionario(sist, p1);
+        //pruebaDiccionarioYMatriz(sist, p1);
+        
+        
     }
-    public static void pruebaDiccionario(Sistema s, Prueba p){
+    public static void pruebaDiccionarioYMatriz(Sistema s, Prueba p){
         p.ver(s.CrearSistemaMensajes().resultado, Retorno.Resultado.OK, "Se creo Sistema con una unidad C");
         p.ver(s.AgregarCarpeta("C", "Universidad").resultado, Retorno.Resultado.OK, "Se creo carpeta -> Universidad en Unidad C");
         p.ver(s.AgregarMensaje("C", "Universidad", "Programacion").resultado, Retorno.Resultado.OK, "Se agrego Mensaje/Documento Programacion a la carpeta Universidad de unidad C");
@@ -54,6 +56,24 @@ public class Obligatorio2020 {
         p.ver(s.ImprimirDiccionario().resultado, Retorno.Resultado.OK, "Imprimir palabras del diccionario alfabeticamente");
         
         p.ver(s.ImprimirTextoIncorrecto().resultado, Retorno.Resultado.OK, "Imprimir texto que no se encunetra en el diccionario");
+        
+        p.ver(s.CargarDistancias(s.getMatriz()).resultado, Retorno.Resultado.OK, "Cargar distancias");
+        
+        Retorno mostrarCamino = s.BuscarCamino(s.getMatriz(), "MVD", "BA");
+        
+        p.ver(mostrarCamino.resultado, Retorno.Resultado.OK, mostrarCamino.valorString);
+        
+        Retorno mostrarCamino2 = s.BuscarCamino(s.getMatriz(), "MVD", "NYC");
+        
+        p.ver(mostrarCamino2.resultado, Retorno.Resultado.OK, mostrarCamino2.valorString);
+        
+        Retorno mostrarCamino3 = s.BuscarCamino(s.getMatriz(), "POA", "NYC");
+        
+        p.ver(mostrarCamino3.resultado, Retorno.Resultado.OK, mostrarCamino3.valorString);
+        
+        Retorno mostrarCamino4 = s.BuscarCamino(s.getMatriz(), "NYC", "SP");
+        
+        p.ver(mostrarCamino4.resultado, Retorno.Resultado.OK, mostrarCamino4.valorString);
         
     }
     
@@ -109,24 +129,24 @@ public class Obligatorio2020 {
         
         /***** INSERTAR Y DESPLAZAR *****/
         
-//        p.ver(s.insertarPalabraYDesplazar(1, 1, "pepito").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(1, 1, "audioad").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(1, 1, "jp").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(1, 1, "fer").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(1, 1, "manu").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(1, 1, "otra").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(3, 3, "hola").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva3").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(6, 1, "nueva8").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(5, 1, "ultimotest3").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(5, 1, "ultimotest2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(5, 1, "ultimotest1").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.insertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
-//        p.ver(s.ImprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
+        p.ver(s.InsertarPalabraYDesplazar(1, 1, "pepito").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(1, 1, "audioad").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(1, 1, "jp").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(1, 1, "fer").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(1, 1, "manu").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(1, 1, "otra").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(3, 3, "hola").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(6, 1, "nueva").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(6, 1, "nueva2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(6, 1, "nueva3").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(6, 1, "nueva8").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(5, 1, "ultimotest3").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(5, 1, "ultimotest2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(5, 1, "ultimotest1").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.InsertarPalabraYDesplazar(5, 3, "ultimotest3/2").resultado,Retorno.Resultado.OK,"Insertar y desplazar");
+        p.ver(s.ImprimirTexto().resultado, Retorno.Resultado.OK, "Imprimir texto de Documento Programación");
         
         /***** INSERTAR Y DESPLAZAR *****/
         

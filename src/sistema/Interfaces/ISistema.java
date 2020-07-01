@@ -24,5 +24,7 @@ public interface ISistema {
     Retorno IngresarPalabraDiccionario(String palabraAIngresar);
     Retorno BorrarPalabraDiccionario(String palabraABorrar);
     Retorno ImprimirDiccionario();
-    Retorno ImprimirTextoIncorrecto();   
+    Retorno ImprimirTextoIncorrecto();
+    Retorno CargarDistancias(int[][] Ciudades);
+    Retorno BuscarCamino ( int [][] M, String origen, String destino);
 }

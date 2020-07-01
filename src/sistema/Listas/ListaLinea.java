@@ -82,7 +82,6 @@ public class ListaLinea {
             }
         }
     }
-
     
     public void mostrarPorLinea(int posicionLinea) {
         NodoLinea aux = obtenerNodoPorNombre(posicionLinea);
